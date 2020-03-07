@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import venueReducer from "./venueReducer";
+import surfaceReducer from "./surfaceReducer";
 
 export default combineReducers({
-  venues: venueReducer
+  surfaces: surfaceReducer
 });

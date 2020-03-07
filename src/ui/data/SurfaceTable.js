@@ -1,14 +1,15 @@
 import React from "react";
 
 import { Table } from "antd";
+import { connect } from "react-redux";
+import { fetchSurfaces } from "../../redux/actions/surfaceActions";
 
-export class SurfaceTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this._data = props.data;
-  }
+class SurfaceTable extends React.Component {
+  componentDidMount = async () => {
+    this.props.fetchSurfaces();
+  };
+
   render() {
-    this.loadData();
     const columns = [
       {
         title: "Venue Name",
@@ -32,6 +33,12 @@ export class SurfaceTable extends React.Component {
       }
     ];
 
-    return <Table columns={columns} dataSource={this._data} />;
+    return <Table columns={columns} dataSource={this.props.surfaces} />;
   }
 }
+
+const mapStateToProps = state => {
+  return { surfaces: state.surfaces.items };
+};
+
+export default connect(mapStateToProps, { fetchSurfaces })(SurfaceTable);

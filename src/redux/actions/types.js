@@ -1,1 +1,1 @@
-export const FETCH_VENUES = "FETCH_VENUES";
+export const FETCH_SURFACES = "FETCH_VENUES";

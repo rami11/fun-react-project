@@ -1,8 +1,8 @@
-import { FETCH_VENUES } from "../actions/types";
+import { FETCH_SURFACES } from "../actions/types";
 
 export default function(state = [], action) {
   switch (action.type) {
-    case FETCH_VENUES:
+    case FETCH_SURFACES:
       return {
         ...state,
         items: action.payload
