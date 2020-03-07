@@ -1,12 +1,15 @@
 import React from "react";
 
 import { Table } from "antd";
-import { connect } from "react-redux";
-import { fetchSurfaces } from "../../redux/actions/surfaceActions";
 
 class SurfaceTable extends React.Component {
-  componentDidMount = async () => {
-    this.props.fetchSurfaces();
+  constructor(props) {
+    super(props);
+  }
+
+  onSelectChange = selectedRowKeys => {
+    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    this.setState({ selectedRowKeys });
   };
 
   render() {
@@ -41,6 +44,7 @@ class SurfaceTable extends React.Component {
           key: surfaces[i].id,
           surfaceName: surfaces[i].surfaceName,
           venueName: surfaces[i].venueName,
+          status: surfaces[i].status,
           sport: surfaces[i].sport
         });
       }
@@ -50,8 +54,4 @@ class SurfaceTable extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { surfaces: state.surfaces.items };
-};
-
-export default connect(mapStateToProps, { fetchSurfaces })(SurfaceTable);
+export default SurfaceTable;
