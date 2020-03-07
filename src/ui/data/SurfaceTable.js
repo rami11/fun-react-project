@@ -14,12 +14,12 @@ class SurfaceTable extends React.Component {
       {
         title: "Venue Name",
         dataIndex: "venueName",
-        key: "venu-name"
+        key: "venuName"
       },
       {
         title: "Surface Name",
         dataIndex: "surfaceName",
-        key: "suface-name"
+        key: "surfaceName"
       },
       {
         title: "Status",
@@ -33,7 +33,20 @@ class SurfaceTable extends React.Component {
       }
     ];
 
-    return <Table columns={columns} dataSource={this.props.surfaces} />;
+    let data = [];
+    let surfaces = this.props.surfaces;
+    if (surfaces) {
+      for (let i = 0; i < surfaces.length; i++) {
+        data.push({
+          key: surfaces[i].id,
+          surfaceName: surfaces[i].surfaceName,
+          venueName: surfaces[i].venueName,
+          sport: surfaces[i].sport
+        });
+      }
+    }
+
+    return <Table columns={columns} dataSource={data} />;
   }
 }
 
