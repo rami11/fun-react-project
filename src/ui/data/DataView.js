@@ -50,12 +50,7 @@ class DataView extends React.Component {
               </Tabs>
             </Col>
             <Col flex="400px">
-              <DetailCard
-                // selectedSurfaceItem={
-                //   this.props.surfaces ? this.props.surfaces[0] : {}
-                // }
-                detail={this.props.selectedSurfaceItem}
-              />
+              <DetailCard />
             </Col>
           </Row>
         </Content>
@@ -65,8 +60,6 @@ class DataView extends React.Component {
 }
 
 const mapStateToProps = state => {
-  // console.log("state", state);
-
   return {
     surfaces: state.data.surfaces,
     servers: state.data.servers,

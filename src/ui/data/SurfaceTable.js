@@ -1,13 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { Table } from "antd";
 
 class SurfaceTable extends React.Component {
-  onSelectChange = selectedRowKeys => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    this.setState({ selectedRowKeys });
-  };
-
   render() {
     const columns = [
       {
@@ -55,15 +51,22 @@ class SurfaceTable extends React.Component {
             }
           };
         }}
-        selection={this.onSelectChange}
         columns={columns}
         dataSource={data}
         footer={() => `Matched: ${data.length}`}
-        // rowSelection={9}
-        selections={true}
+        rowSelection={{
+          selectedRowKeys: this.props.selectedSurfaceItem
+            ? [this.props.selectedSurfaceItem.id]
+            : [],
+          type: "radio"
+        }}
       />
     );
   }
 }
 
-export default SurfaceTable;
+const mapStateToProps = state => {
+  return { selectedSurfaceItem: state.data.selectedSurfaceItem };
+};
+
+export default connect(mapStateToProps)(SurfaceTable);

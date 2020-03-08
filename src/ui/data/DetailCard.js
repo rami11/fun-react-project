@@ -8,8 +8,9 @@ class DetailCard extends React.Component {
   render() {
     if (this.props.selectedSurfaceItem) {
       const si = this.props.selectedSurfaceItem;
+
       return (
-        <Card title="Detail" bordered={true} style={{ marginLeft: "8px" }}>
+        <Card title="Detail" bordered={false} style={{ marginLeft: "8px" }}>
           <Descriptions column={1}>
             <Descriptions.Item label="Venue Name">
               {si.venueName}
@@ -31,10 +32,7 @@ class DetailCard extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  const fff = { selectedSurfaceItem: state.data.selectedSurfaceItem };
-  console.log(fff);
-
-  return fff;
+  return { selectedSurfaceItem: state.data.selectedSurfaceItem };
 };
 
 export default connect(mapStateToProps)(DetailCard);
