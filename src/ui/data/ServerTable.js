@@ -34,8 +34,6 @@ class ServerTable extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-
   return { selectedSurfaceItem: state.data.selectedSurfaceItem };
 };
 
