@@ -17,7 +17,16 @@ export class SideNav extends React.Component {
 
   render() {
     return (
-      <Sider theme="light">
+      <Sider
+        style={{
+          position: "fixed",
+          overflow: "auto",
+          height: "100vh",
+          position: "fixed",
+          left: 0
+        }}
+        theme="light"
+      >
         <div className="logo" />
         <Menu
           theme="light"

@@ -15,9 +15,9 @@ export class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout className="site-layout" style={{ marginLeft: 200 }}>
           <SideNav />
-          <Layout>
+          <Layout style={{ height: "100vh" }}>
             <Content>
               <Switch>
                 <Route exact path="/" component={EmptyView} />
