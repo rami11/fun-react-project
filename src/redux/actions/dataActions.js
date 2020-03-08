@@ -1,4 +1,4 @@
-import { FETCH_DATA } from "./types";
+import { FETCH_DATA, SELECT_SURFACE_ITEM } from "./types";
 
 const baseUrl =
   "https://2hsjstzo71.execute-api.us-east-1.amazonaws.com/prod/livebarn-interview-project";
@@ -28,5 +28,17 @@ export function fetchData(text = "") {
     const data = { surfaces, servers };
 
     dispatch({ type: FETCH_DATA, payload: data });
+  };
+}
+
+export function findSurfaceItem(surfaceId) {
+  return async dispatch => {
+    const resp = await fetch(baseUrl);
+    const surfaces = await resp.json();
+    const selectedItem = surfaces.find(surface => {
+      return surface.id === surfaceId;
+    });
+
+    dispatch({ type: SELECT_SURFACE_ITEM, payload: selectedItem });
   };
 }

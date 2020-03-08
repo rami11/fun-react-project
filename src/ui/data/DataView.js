@@ -6,7 +6,7 @@ import SurfaceTable from "./SurfaceTable";
 import ServerTable from "./ServerTable";
 
 import { connect } from "react-redux";
-import { fetchData } from "../../redux/actions/dataActions";
+import { fetchData, findSurfaceItem } from "../../redux/actions/dataActions";
 
 const { Search } = Input;
 const { Content } = Layout;
@@ -16,18 +16,14 @@ class DataView extends React.Component {
   componentDidMount = () => {
     this.props.fetchData();
   };
-  onTabChange() {
-    console.log("Tab Changed!");
-  }
-
-  onSelectChange = selectedRowKeys => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    this.setState({ selectedRowKeys });
-  };
 
   onSearchChange = event => {
     const text = event.target.value.trim();
     this.props.fetchData(text);
+  };
+
+  onSurfaceTableRowClick = rowIndex => {
+    this.props.findSurfaceItem(rowIndex.key);
   };
 
   render() {
@@ -41,9 +37,12 @@ class DataView extends React.Component {
           />
           <Row>
             <Col flex="auto">
-              <Tabs onChange={this.onTabChange} animated={false}>
+              <Tabs animated={false}>
                 <TabPane tab="Surfaces" key="1">
-                  <SurfaceTable surfaces={this.props.surfaces} />
+                  <SurfaceTable
+                    onRowClick={this.onSurfaceTableRowClick}
+                    surfaces={this.props.surfaces}
+                  />
                 </TabPane>
                 <TabPane tab="Servers" key="2">
                   <ServerTable servers={this.props.servers} />
@@ -51,7 +50,12 @@ class DataView extends React.Component {
               </Tabs>
             </Col>
             <Col flex="400px">
-              <DetailCard />
+              <DetailCard
+                // selectedSurfaceItem={
+                //   this.props.surfaces ? this.props.surfaces[0] : {}
+                // }
+                detail={this.props.selectedSurfaceItem}
+              />
             </Col>
           </Row>
         </Content>
@@ -61,7 +65,15 @@ class DataView extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { surfaces: state.data.surfaces, servers: state.data.servers };
+  // console.log("state", state);
+
+  return {
+    surfaces: state.data.surfaces,
+    servers: state.data.servers,
+    selectedSurfaceItem: state.selectedSurfaceItem
+  };
 };
 
-export default connect(mapStateToProps, { fetchData })(DataView);
+export default connect(mapStateToProps, { fetchData, findSurfaceItem })(
+  DataView
+);

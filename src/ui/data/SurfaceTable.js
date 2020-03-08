@@ -3,10 +3,6 @@ import React from "react";
 import { Table } from "antd";
 
 class SurfaceTable extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   onSelectChange = selectedRowKeys => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
     this.setState({ selectedRowKeys });
@@ -52,10 +48,19 @@ class SurfaceTable extends React.Component {
 
     return (
       <Table
+        onRow={record => {
+          return {
+            onClick: () => {
+              this.props.onRowClick(record);
+            }
+          };
+        }}
         selection={this.onSelectChange}
         columns={columns}
         dataSource={data}
         footer={() => `Matched: ${data.length}`}
+        // rowSelection={9}
+        selections={true}
       />
     );
   }

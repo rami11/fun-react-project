@@ -3,10 +3,6 @@ import React from "react";
 import { Table } from "antd";
 
 class ServerTable extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const columns = [
       {

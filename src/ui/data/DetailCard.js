@@ -1,23 +1,40 @@
 import React from "react";
 import { Card } from "antd";
 import { Descriptions } from "antd";
+import { connect } from "react-redux";
+import { Empty } from "antd";
 
 class DetailCard extends React.Component {
   render() {
-    return (
-      <Card title="Detail" bordered={true} style={{ marginLeft: "8px" }}>
-        <Descriptions column={1}>
-          <Descriptions.Item label="Venue Name">
-            Arena Rapentigny
-          </Descriptions.Item>
-          <Descriptions.Item label="Surface Name">Rink #1</Descriptions.Item>
-          <Descriptions.Item label="Status">OK</Descriptions.Item>
-          <Descriptions.Item label="Sport">Hockey</Descriptions.Item>
-          <Descriptions.Item label="Server Ip">0.0.0.17594</Descriptions.Item>
-        </Descriptions>
-      </Card>
-    );
+    if (this.props.selectedSurfaceItem) {
+      const si = this.props.selectedSurfaceItem;
+      return (
+        <Card title="Detail" bordered={true} style={{ marginLeft: "8px" }}>
+          <Descriptions column={1}>
+            <Descriptions.Item label="Venue Name">
+              {si.venueName}
+            </Descriptions.Item>
+            <Descriptions.Item label="Surface Name">
+              {si.surfaceName}
+            </Descriptions.Item>
+            <Descriptions.Item label="Status">{si.status}</Descriptions.Item>
+            <Descriptions.Item label="Sport">{si.sport}</Descriptions.Item>
+            <Descriptions.Item label="Server Ip">
+              {si.server.ip4}
+            </Descriptions.Item>
+          </Descriptions>
+        </Card>
+      );
+    } else {
+      return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+    }
   }
 }
+const mapStateToProps = state => {
+  const fff = { selectedSurfaceItem: state.data.selectedSurfaceItem };
+  console.log(fff);
 
-export default DetailCard;
+  return fff;
+};
+
+export default connect(mapStateToProps)(DetailCard);
