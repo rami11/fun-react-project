@@ -22,7 +22,7 @@ export class SideNav extends React.Component {
     } else {
       key = "1";
     }
-    return [key];
+    return key;
   }
 
   render() {
@@ -32,7 +32,6 @@ export class SideNav extends React.Component {
           position: "fixed",
           overflow: "auto",
           height: "100vh",
-          position: "fixed",
           left: 0
         }}
         theme="light"
