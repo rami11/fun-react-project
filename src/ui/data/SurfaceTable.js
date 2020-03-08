@@ -50,7 +50,14 @@ class SurfaceTable extends React.Component {
       }
     }
 
-    return <Table columns={columns} dataSource={data} />;
+    return (
+      <Table
+        selection={this.onSelectChange}
+        columns={columns}
+        dataSource={data}
+        footer={() => "Matched:" + ""}
+      />
+    );
   }
 }
 
