@@ -1,19 +1,29 @@
 import React from "react";
 
-import { Layout, Menu } from "antd";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { selectSiderElement } from "../../redux/actions/siderActions";
+import { NavLink } from "react-router-dom";
+
+import { Layout, Menu } from "antd";
 
 const { Sider } = Layout;
 
 export class SideNav extends React.Component {
   onElementSelect = event => {
     const key = event.key;
-    console.log(key);
-
     this.props.selectSiderElement(key);
   };
+
+  getSelectedKey() {
+    const pathname = window.location.pathname;
+    let key = "";
+    if (pathname === "/data") {
+      key = "2";
+    } else {
+      key = "1";
+    }
+    return [key];
+  }
 
   render() {
     return (
@@ -30,9 +40,8 @@ export class SideNav extends React.Component {
         <div className="logo" />
         <Menu
           theme="light"
-          defaultSelectedKeys={["1"]}
           mode="inline"
-          selectedKeys={[this.props.elementKey]}
+          selectedKeys={this.getSelectedKey()}
           onSelect={this.onElementSelect}
         >
           <Menu.Item key="1">
