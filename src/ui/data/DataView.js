@@ -63,6 +63,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchData, findSurfaceItem })(
-  DataView
-);
+export default connect(mapStateToProps, {
+  fetchData,
+  findSurfaceItem
+})(DataView);
