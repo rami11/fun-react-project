@@ -13,10 +13,6 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 
 class DataView extends React.Component {
-  componentDidMount = () => {
-    this.props.fetchData();
-  };
-
   onSearchChange = event => {
     const text = event.target.value.trim();
     this.props.fetchData(text);
